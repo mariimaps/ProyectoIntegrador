@@ -11,7 +11,9 @@ import java.util.Scanner;
  *
  * @author Maritza
  */
+
 public class AlDijk {
+    //Se crea la tablaMod que es la tabla de rutas que se mostrará como resultado
     public static int[][] CrearTablaMod(int n, int RInicio){
          int tablaN[][]=new int[n][4];
         
@@ -21,12 +23,13 @@ public class AlDijk {
             tablaN[i][2]=-1;        
             tablaN[i][3]=0;
         }
-        tablaN[RInicio][1]=0;
+        tablaN[RInicio][1]=0; //La distancia del router de inicio siempre será 0
         return tablaN;
     }
     public static void dijkstra(int[][] tablaMod, int n, int[][] tablaEnr){
-        
-        int pos=HallarMenor(tablaMod,n);
+        //Se piden como parámteros iniciales la tablaMod, la longitud de la matriz Enr y la matriz tablaEnr
+        //En el main se utilizará esta función por cada router 
+        int pos=HallarMenor(tablaMod,n); //Se llama a la función HallarMenor que retorna pos 
         tablaMod[pos][3]=1;
         for(int i=0;i<n;i++){
             if(tablaEnr[pos][i]!=1000)
@@ -48,14 +51,14 @@ public class AlDijk {
             if(tablaMod[i][3]!=1 && tablaMod[i][1]<= menor)
             {
               menor=tablaMod[i][1];
-              pos=i;
+              pos=i; //pos es la posición del router con menor distancia según la tabla mod 
             }  
         }
         return pos;
     }
     
     public static void IngresarArista(int[][] tablaEnr){
-        
+        //Se ingresan y almacenan los valores en la matriz de enrutamiento
         Scanner sc = new Scanner(System.in);
         System.out.println("Router incial: ");
         int RI = sc.nextInt();      
@@ -70,9 +73,9 @@ public class AlDijk {
         Scanner sc = new Scanner(System.in);
         
         System.out.println("Cantidad de routers en la red: ");
-        int n=sc.nextInt();  
+        int n=sc.nextInt();   
         int tablaEnr[][]=new int[n][n];
-        System.out.println("Router inicio (R0): ");
+        System.out.println("Router inicio: ");
         int RInicio=sc.nextInt();
      
         for (int i=0; i<n; i++)
